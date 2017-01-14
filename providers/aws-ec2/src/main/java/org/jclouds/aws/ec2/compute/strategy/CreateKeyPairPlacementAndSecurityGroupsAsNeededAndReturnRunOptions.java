@@ -87,7 +87,10 @@ public class CreateKeyPairPlacementAndSecurityGroupsAsNeededAndReturnRunOptions 
       AWSRunInstancesOptions instanceOptions = AWSRunInstancesOptions.class
             .cast(super.execute(region, group, template));
 
-      String placementGroupName = template.getHardware().getId().startsWith("cc") ? createNewPlacementGroupUnlessUserSpecifiedOtherwise(
+      String hardwareId = template.getHardware().getId();
+
+      boolean supportsPlacement = !((hardwareId.startsWith("t") || (hardwareId.startsWith("m3")) && hardwareId.contains("large")));
+      String placementGroupName = supportsPlacement ? createNewPlacementGroupUnlessUserSpecifiedOtherwise(
             region, group, template.getOptions()) : null;
 
       if (placementGroupName != null)
