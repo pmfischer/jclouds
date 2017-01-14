@@ -260,6 +260,12 @@ public class EC2HardwareBuilder extends HardwareBuilder {
       virtualizationTypes(VirtualizationType.HVM);
       return this;
    }
+
+   private EC2HardwareBuilder r4() {
+	      virtualizationTypes(VirtualizationType.HVM);
+	      return this;
+	   }
+
    
    private EC2HardwareBuilder g2() {
       virtualizationTypes(VirtualizationType.HVM);
@@ -1015,6 +1021,68 @@ public class EC2HardwareBuilder extends HardwareBuilder {
                   new VolumeBuilder().type(LOCAL).size(320.0f).device("/dev/sdc").bootDevice(false).durable(false).build()));
    }
 
+   
+   /**
+    * @see InstanceType#R4_LARGE
+    */
+   public static EC2HardwareBuilder r4_large() {
+      return new EC2HardwareBuilder(InstanceType.R4_LARGE).r4()
+            .ram(15616)
+            .processors(ImmutableList.of(new Processor(2.0, 3.5)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   /**
+    * @see InstanceType#R4_XLARGE
+    */
+   public static EC2HardwareBuilder r4_xlarge() {
+      return new EC2HardwareBuilder(InstanceType.R4_XLARGE).r4()
+            .ram(31232)
+            .processors(ImmutableList.of(new Processor(4.0, 3.5)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   /**
+    * @see InstanceType#R4_2XLARGE
+    */
+   public static EC2HardwareBuilder r4_2xlarge() {
+      return new EC2HardwareBuilder(InstanceType.R4_2XLARGE).r4()
+            .ram(62464)
+            .processors(ImmutableList.of(new Processor(8.0, 3.5)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   /**
+    * @see InstanceType#R4_4XLARGE
+    */
+   public static EC2HardwareBuilder r4_4xlarge() {
+      return new EC2HardwareBuilder(InstanceType.R4_4XLARGE).r4()
+            .ram(124928)
+            .processors(ImmutableList.of(new Processor(16.0, 3.5)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   /**
+    * @see InstanceType#R4_8XLARGE
+    */
+   public static EC2HardwareBuilder r4_8xlarge() {
+      return new EC2HardwareBuilder(InstanceType.R4_8XLARGE).r4()
+            .ram(249856)
+            .processors(ImmutableList.of(new Processor(32.0, 3.5)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   /**
+    * @see InstanceType#R4_16XLARGE
+    */
+   public static EC2HardwareBuilder r4_16xlarge() {
+      return new EC2HardwareBuilder(InstanceType.R4_16XLARGE).r4()
+            .ram(499712)
+            .processors(ImmutableList.of(new Processor(64.0, 3.0)))
+            .rootDeviceType(RootDeviceType.EBS);
+   }
+
+   
    @SuppressWarnings("unchecked")
    @Override
    public Hardware build() {
