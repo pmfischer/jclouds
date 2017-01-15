@@ -88,11 +88,11 @@ public class CreateKeyPairPlacementAndSecurityGroupsAsNeededAndReturnRunOptions 
             .cast(super.execute(region, group, template));
 
       String hardwareId = template.getHardware().getId();
-
-      boolean supportsPlacement = !((hardwareId.startsWith("t") || (hardwareId.startsWith("m3")) && hardwareId.contains("large")));
+      boolean supportsPlacement = !(hardwareId.startsWith("t") || (hardwareId.startsWith("m3")));
+    
       String placementGroupName = supportsPlacement ? createNewPlacementGroupUnlessUserSpecifiedOtherwise(
             region, group, template.getOptions()) : null;
-
+      
       if (placementGroupName != null)
          instanceOptions.inPlacementGroup(placementGroupName);
 
